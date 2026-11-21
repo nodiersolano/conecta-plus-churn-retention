@@ -1,0 +1,11 @@
+datos_conecta/
+*.db
+*.jsonl
+*.jsonl.gz
+*.zip
+Enunciado - Prueba técnica Ciencia de Datos.pdf
+.venv/
+.env
+.env.*
+__pycache__/
+.ipynb_checkpoints/
