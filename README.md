@@ -20,17 +20,20 @@ Crear o activar un entorno Python compatible, instalar `requirements.txt` y abri
 
 ## Ejecución privada en Google Colab
 
-En Colab, cargar privadamente `datos_conecta.zip` desde el panel de archivos o desde una ubicación autorizada y descomprimirlo en la raíz de trabajo. No incrustar el ZIP ni registros en el repositorio. Después subir o clonar el repositorio y abrir `solucion.ipynb`.
+Mientras no exista una URL pública definitiva, abre Google Colab, selecciona **Archivo > Subir cuaderno** y sube `solucion.ipynb`. En el panel **Archivos**, sube también `requirements.txt`; abrir un notebook desde GitHub no descarga automáticamente los demás archivos del repositorio. Cuando el notebook esté disponible en un repositorio autorizado, podrás abrirlo desde allí, pero deberás conservar `requirements.txt` y trabajar desde el directorio que contenga el notebook.
 
-[Open in Colab](https://colab.research.google.com/github/REEMPLAZAR_ORGANIZACION/REEMPLAZAR_REPOSITORIO/blob/main/solucion.ipynb)
+1. Ejecuta `%pip install -q -r requirements.txt` una sola vez en una celda de Colab.
+2. Ejecuta la celda inicial de configuración; si `datos_conecta/` no existe, solicitará cargar privadamente `datos_conecta.zip`.
+3. El ZIP debe contener `datos_conecta/conecta.db`, `datos_conecta/tickets.jsonl` y `datos_conecta/eventos.jsonl.gz` (o esos tres archivos en la raíz). La configuración valida la estructura y evita crear una carpeta anidada duplicada.
+4. Ejecuta las celdas en orden hasta el final. El notebook definitivo contiene 61 celdas, incluidas 34 celdas de código, y no requiere una celda de instalación dentro del notebook. El archivo `predicciones.csv` se escribirá en el directorio de trabajo de Colab.
 
-El enlace anterior es una plantilla: debe reemplazarse con la URL definitiva del repositorio antes de publicar.
+No subas el ZIP, la base SQLite, los JSONL ni registros individuales al repositorio. El notebook imprime resultados agregados y evita mostrar textos de tickets o muestras individuales de clientes.
 
 ## Reproducción y resultados verificados
 
 La ejecución generó 1.549 filas, una por cliente a puntuar, sin IDs duplicados y con las tres columnas exigidas. Bajo los supuestos de 25.000 COP por contacto, 40% de efectividad y 12 mensualidades, la regla recomendó 920 contactos; el costo fue 23.000.000 COP y el beneficio neto esperado fue 17.176.835,60 COP. Son valores esperados, no garantías.
 
-El hallazgo senior mostró una asociación descriptiva entre exposición previa a 5.3.0 y cancelación: 25,99% frente a 12,16% sin exposición. La exposición coincide con diferencias de fecha, plataforma y actividad; se requiere una evaluación controlada antes de atribuir causalidad.
+El hallazgo senior mostró en septiembre de 2025 una asociación descriptiva entre exposición previa a 5.3.0 y cancelación: 144 de 554 clientes expuestos (25,99%) frente a 123 de 1.174 clientes no expuestos (10,48%), una diferencia aproximada de 15,52 puntos porcentuales. La exposición coincide con diferencias de fecha, plataforma y actividad; se requiere una evaluación controlada antes de atribuir causalidad.
 
 ## Limitaciones y sustentación
 
