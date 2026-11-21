@@ -1,5 +1,7 @@
 # Prueba técnica de Ciencia de Datos — Conecta+
 
+**[Open in Colab](https://colab.research.google.com/github/nodiersolano/conecta-plus-churn-retention/blob/main/solucion.ipynb)**
+
 Solución reproducible para explorar el riesgo de cancelación, construir variables históricas, calibrar probabilidades y priorizar contactos bajo supuestos económicos explícitos.
 
 ## Estructura
@@ -7,12 +9,11 @@ Solución reproducible para explorar el riesgo de cancelación, construir variab
 - `solucion.ipynb`: notebook de exploración, auditoría, integración temporal, modelado, calibración, decisión económica y hallazgo senior.
 - `predicciones.csv`: salida final con `cliente_id`, `probabilidad` y `contactar`.
 - `MEMO.md`: resumen ejecutivo.
-- `BITACORA_IA.md`: uso transparente de IA y decisiones pendientes de completar.
+- `BITACORA_IA.md`: uso transparente de IA y decisiones documentadas; no tiene campos pendientes.
 - `requirements.txt`: dependencias de Python.
-- `inicio.ipynb`: notebook original entregado; no se modifica.
-- `datos_conecta/`: fuentes privadas excluidas de Git.
+- `datos_conecta/`: datos fuente privados excluidos de Git.
 
-La base SQLite, los JSONL, el ZIP, el PDF del enunciado y los registros individuales no deben publicarse.
+Los datos fuente originales (base SQLite y archivos JSONL), `datos_conecta.zip`, el PDF del enunciado y los registros individuales son privados y no deben publicarse. `predicciones.csv` sí es un entregable requerido expresamente para la evaluación.
 
 ## Ejecución local
 
@@ -20,7 +21,7 @@ Crear o activar un entorno Python compatible, instalar `requirements.txt` y abri
 
 ## Ejecución privada en Google Colab
 
-Mientras no exista una URL pública definitiva, abre Google Colab, selecciona **Archivo > Subir cuaderno** y sube `solucion.ipynb`. En el panel **Archivos**, sube también `requirements.txt`; abrir un notebook desde GitHub no descarga automáticamente los demás archivos del repositorio. Cuando el notebook esté disponible en un repositorio autorizado, podrás abrirlo desde allí, pero deberás conservar `requirements.txt` y trabajar desde el directorio que contenga el notebook.
+Abre el notebook mediante el enlace **[Open in Colab](https://colab.research.google.com/github/nodiersolano/conecta-plus-churn-retention/blob/main/solucion.ipynb)**. Si prefieres cargarlo manualmente, selecciona **Archivo > Subir cuaderno** y sube `solucion.ipynb`. En el panel **Archivos**, sube también `requirements.txt`; abrir un notebook desde GitHub no descarga automáticamente los demás archivos del repositorio.
 
 1. Ejecuta `%pip install -q -r requirements.txt` una sola vez en una celda de Colab.
 2. Ejecuta la celda inicial de configuración; si `datos_conecta/` no existe, solicitará cargar privadamente `datos_conecta.zip`.
