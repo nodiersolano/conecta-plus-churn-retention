@@ -7,8 +7,8 @@ El objetivo es priorizar clientes con mayor probabilidad estimada de cancelar y 
 ## Hallazgos principales
 
 - La tabla histórica contiene 4.758 observaciones y el corte de diciembre contiene 1.549 clientes.
-- En septiembre de 2025, la exposición previa a eventos de la versión 5.3.0 se asoció descriptivamente con 144 cancelaciones de 554 clientes (25,99%), frente a 123 cancelaciones de 1.174 clientes no expuestos (10,48%). La diferencia fue de aproximadamente 15,52 puntos porcentuales. Esta comparación es asociativa, no causal: la exposición coincide con diferencias de fecha, plataforma y actividad; se recomienda revisar técnicamente `CRASH_ON_START` y medir un hotfix con cohortes predefinidas.
-- La señal está concentrada en el corte de septiembre y en actividad móvil. También hay diferencias de uso entre grupos; por eso no se puede afirmar que la versión sea la causa. Se recomienda revisar técnicamente `CRASH_ON_START` y medir un hotfix con cohortes predefinidas.
+- En septiembre de 2025, la exposición previa a eventos de la versión 5.3.0 se asoció descriptivamente con 144 cancelaciones de 554 clientes (25,99%), frente a 123 cancelaciones de 1.174 clientes no expuestos (10,48%). La diferencia fue de aproximadamente 15,52 puntos porcentuales. Esta comparación es asociativa, no causal: la exposición coincide con diferencias de fecha, plataforma y actividad.
+- La señal está concentrada en el corte de septiembre y en actividad móvil. También hay diferencias de uso entre grupos; por eso no se puede afirmar que la versión sea la causa.
 
 ## Recomendación económica
 
