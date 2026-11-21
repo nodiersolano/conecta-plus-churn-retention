@@ -6,7 +6,7 @@ Solución reproducible para explorar el riesgo de cancelación, construir variab
 
 ## Estructura
 
-- `solucion.ipynb`: notebook de exploración, auditoría, integración temporal, modelado, calibración, decisión económica y hallazgo senior.
+- `solucion.ipynb`: notebook definitivo de la solución B, con 41 variables predictoras, auditoría, integración temporal, modelado, calibración, decisión económica y hallazgo senior.
 - `predicciones.csv`: salida final con `cliente_id`, `probabilidad` y `contactar`.
 - `MEMO.md`: resumen ejecutivo.
 - `BITACORA_IA.md`: uso transparente de IA y decisiones documentadas; no tiene campos pendientes.
@@ -32,10 +32,12 @@ No subas el ZIP, la base SQLite, los JSONL ni registros individuales al reposito
 
 ## Reproducción y resultados verificados
 
-La ejecución generó 1.549 filas, una por cliente a puntuar, sin IDs duplicados y con las tres columnas exigidas. Bajo los supuestos de 25.000 COP por contacto, 40% de efectividad y 12 mensualidades, la regla recomendó 920 contactos; el costo fue 23.000.000 COP y el beneficio neto esperado fue 17.176.835,60 COP. Son valores esperados, no garantías.
+La solución B conserva 41 variables predictoras y utiliza regresión logística sin ponderación de clases (`logistic_unweighted`) con calibración sigmoide. En la evaluación de septiembre obtuvo ROC-AUC 0,698060, PR-AUC 0,316809 y Brier Score 0,123211. La ejecución generó 1.549 filas, una por cliente a puntuar, sin IDs duplicados y con las tres columnas exigidas. Bajo los supuestos de 25.000 COP por contacto, 40% de efectividad y 12 mensualidades, la regla recomendó 818 contactos; el costo fue 20.450.000 COP, las cancelaciones evitadas esperadas fueron aproximadamente 70,00, el valor bruto esperado fue 35.725.235,25 COP y el beneficio neto esperado fue 15.275.235,25 COP. Son valores esperados, no garantías.
+
+La versión B retira exclusivamente 15 variables de tickets cuya disponibilidad histórica no puede garantizarse: estados abiertos y conteos de palabras clave por ventana. Se conservan las demás fuentes y la ingeniería temporal. La comparación con la versión A fue exploratoria y no constituye una prueba independiente de superioridad.
 
 El hallazgo senior mostró en septiembre de 2025 una asociación descriptiva entre exposición previa a 5.3.0 y cancelación: 144 de 554 clientes expuestos (25,99%) frente a 123 de 1.174 clientes no expuestos (10,48%), una diferencia aproximada de 15,52 puntos porcentuales. La exposición coincide con diferencias de fecha, plataforma y actividad; se requiere una evaluación controlada antes de atribuir causalidad.
 
 ## Limitaciones y sustentación
 
-La etiqueta es observacional, la probabilidad calibrada no mide el efecto de una intervención y septiembre fue observado durante el desarrollo. Deben explicarse los cortes temporales, la deduplicación, la cobertura de tickets, el tratamiento de faltantes, la calibración y la fórmula económica. En producción se debe mantener un grupo de control, monitorear calibración y deriva, y reentrenar solo después de revisar calidad y disponibilidad.
+La etiqueta es observacional, la probabilidad calibrada no mide el efecto de una intervención y septiembre fue observado durante el desarrollo. Algunos estados modernos de tickets no tienen `resolved_at` y los mensajes no contienen timestamps; por ello se retiraron las 15 variables temporalmente ambiguas, aunque permanece una limitación de disponibilidad histórica que debe revisarse en producción. Deben explicarse los cortes temporales, la deduplicación, la cobertura de tickets, el tratamiento de faltantes, la calibración y la fórmula económica. En producción se debe mantener un grupo de control, monitorear calibración y deriva, y reentrenar solo después de revisar calidad y disponibilidad.
